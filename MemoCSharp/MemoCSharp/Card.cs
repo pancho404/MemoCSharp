@@ -50,7 +50,10 @@ namespace MemoCSharp
             return Pos;
         }
         
-
+        public void SetPos(int pos)
+        {
+            Pos = pos;
+        }
     }
 
 }

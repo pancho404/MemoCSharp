@@ -9,63 +9,60 @@ namespace MemoCSharp
 
         static void Main(string[] args)
         {
-            List<Card> Cards2 = new List<Card>();
-            Card[] Cards = new Card[6];
-            Init(Cards, Cards2);
-           // Draw(Cards, Cards2);
+            List<Card> Cards = new List<Card>();
+            List<Card> DrawableCards = new List<Card>();
+            Init(Cards);
+            Update(Cards, DrawableCards);
+            Draw(Cards, DrawableCards);
 
 
         }
 
-        private static void Init(Card[] Cards, List<Card> Cards2)
+        private static void Init(List<Card> Cards)
         {
-            //for (int i = 0; i < Cards.Length; i++)
-            //{
-            //    if (i == 0 || i == 1)
-            //    {
-            //        Cards[i] = new Card("█", ConsoleColor.Blue, CardTypes.Blue);
-            //    }
-            //    if (i == 2 || i == 3)
-            //    {
-            //        Cards[i] = new Card("█", ConsoleColor.White, CardTypes.Red);
-            //    }
-            //    if (i == 4 || i == 5)
-            //    {
-            //        Cards[i] = new Card("█", ConsoleColor.White, CardTypes.Green);
-            //    }
-            //}
-            while (Cards2.Count < 6)
+            while (Cards.Count < 6)
             {
-                if (Cards2.Count == 0 || Cards2.Count==1)
+                if (Cards.Count == 0 || Cards.Count == 1)
                 {
-                    Cards2.Add(new Card("█", ConsoleColor.Blue, CardTypes.Blue, 0));
+                    Cards.Add(new Card("█", ConsoleColor.Blue, CardTypes.Blue, 0));
                 }
-                if (Cards2.Count == 2 || Cards2.Count == 3)
+                if (Cards.Count == 2 || Cards.Count == 3)
                 {
-                    Cards2.Add(new Card("█", ConsoleColor.Red, CardTypes.Red, 0));
+                    Cards.Add(new Card("█", ConsoleColor.Red, CardTypes.Red, 0));
                 }
-                if (Cards2.Count == 4 || Cards2.Count == 5)
+                if (Cards.Count == 4 || Cards.Count == 5)
                 {
-                    Cards2.Add(new Card("█", ConsoleColor.Green, CardTypes.Green, 0));
+                    Cards.Add(new Card("█", ConsoleColor.Green, CardTypes.Green, 0));
                 }
             }
-
         }
 
-        private static void Draw(Card[] Cards, List<Card> Cards2)
+        private static void Draw(List<Card>Cards, List<Card> Cards2)
         {
-            for (int i = 0; i < Cards.Length; i++)
+            for (int i = 0; i < 6; i++)
             {
-                Console.ForegroundColor = Cards[i].GetColor();
-                Console.WriteLine(Cards[i].GetSymbol());
+                Console.ForegroundColor = Cards2[i].GetColor();
+                Console.WriteLine(Cards2[i].GetSymbol());
                 Console.WriteLine(" ");
             }
         }
 
-        private static void Update()
+        private static void Update(List<Card> Cards, List<Card> Cards2)
         {
+            SortCarts(Cards, Cards2);
 
+        }
 
+        private static void SortCarts(List<Card> Cards, List<Card> Cards2)
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 6; i++)
+            {
+                int randomNum = rnd.Next(0, Cards.Count - 1);
+                Cards[randomNum].SetPos(i);
+                Cards2.Add(Cards[randomNum]);
+                Cards.RemoveAt(randomNum);
+            }
         }
     }
 }
