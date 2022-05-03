@@ -6,17 +6,19 @@ namespace MemoCSharp
 {
     class Card
     {
-        private string Symbol="█";
+        private string Symbol = "█";
         private bool IsDown;
-        CardTypes type;
-        private ConsoleColor Color=ConsoleColor.White;
+        private int Pos;
+        CardTypes Type;
+        private ConsoleColor Color = ConsoleColor.White;
 
-        public Card(string Symbol, ConsoleColor Color, CardTypes type)
+        public Card(string Symbol, ConsoleColor Color, CardTypes type, int pos)
         {
             this.Symbol = Symbol;
             this.IsDown = true;
-            this.type = type;
-            Color = ConsoleColor.White;
+            this.Type = type;
+            this.Color = Color;
+            this.Pos = pos;
         }
         public void Rotate(string NewSymbol, ConsoleColor NewColor)
         {
@@ -38,19 +40,16 @@ namespace MemoCSharp
             return Color;
         }
 
-        public void SetSymbol(string newSymbol)
+        public CardTypes GetCardType()
         {
-            
-        }
-        public void SetIsDown()
-        {
-            
+            return Type;
         }
 
-        public void SetColor()
+        public int GetPos()
         {
-            
+            return Pos;
         }
+        
 
     }
 
