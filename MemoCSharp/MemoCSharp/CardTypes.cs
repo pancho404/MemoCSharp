@@ -4,7 +4,5 @@ using System.Text;
 
 namespace MemoCSharp
 {
-    class CardTypes
-    {
-    }
+    enum CardTypes { Blue=0, Red, Green};    
 }
