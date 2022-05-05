@@ -20,11 +20,31 @@ namespace MemoCSharp
             this.Color = Color;
             this.Pos = pos;
         }
-        public void Rotate(string NewSymbol, ConsoleColor NewColor)
+        public void Rotate()
         {
-            Symbol = NewSymbol;
-            Color = NewColor;
-            IsDown = false;
+            if (Color==ConsoleColor.White)
+            {
+                switch (Type)
+                {
+                    case CardTypes.Blue:
+                        Color = ConsoleColor.Blue;
+                        break;
+                    case CardTypes.Red:
+                        Color = ConsoleColor.Red;
+                        break;
+                    case CardTypes.Green:
+                        Color = ConsoleColor.Green;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                Color = ConsoleColor.White;
+                IsDown = true;
+            }
+            
         }
         public string GetSymbol()
         {
