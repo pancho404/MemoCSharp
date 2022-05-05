@@ -11,14 +11,14 @@ namespace MemoCSharp
         {
             List<Card> Cards = new List<Card>();
             List<Card> DrawableCards = new List<Card>();
-            Init(Cards);
+            Init(Cards, DrawableCards);
             Update(Cards, DrawableCards);
-            Draw(Cards, DrawableCards);
+            Draw(DrawableCards);
 
 
         }
 
-        private static void Init(List<Card> Cards)
+        private static void Init(List<Card> Cards, List<Card> DrawableCards)
         {
             while (Cards.Count < 6)
             {
@@ -35,32 +35,32 @@ namespace MemoCSharp
                     Cards.Add(new Card("█", ConsoleColor.Green, CardTypes.Green, 0));
                 }
             }
+            SortCarts(Cards, DrawableCards);
         }
 
-        private static void Draw(List<Card>Cards, List<Card> Cards2)
+        private static void Draw(List<Card> DrawableCards)
         {
             for (int i = 0; i < 6; i++)
             {
-                Console.ForegroundColor = Cards2[i].GetColor();
-                Console.WriteLine(Cards2[i].GetSymbol());
+                Console.ForegroundColor = DrawableCards[i].GetColor();
+                Console.WriteLine(DrawableCards[i].GetSymbol());
                 Console.WriteLine(" ");
             }
         }
 
         private static void Update(List<Card> Cards, List<Card> Cards2)
         {
-            SortCarts(Cards, Cards2);
 
         }
 
-        private static void SortCarts(List<Card> Cards, List<Card> Cards2)
+        private static void SortCarts(List<Card> Cards, List<Card> DrawableCards)
         {
             Random rnd = new Random();
             for (int i = 0; i < 6; i++)
             {
                 int randomNum = rnd.Next(0, Cards.Count - 1);
                 Cards[randomNum].SetPos(i);
-                Cards2.Add(Cards[randomNum]);
+                DrawableCards.Add(Cards[randomNum]);
                 Cards.RemoveAt(randomNum);
             }
         }
